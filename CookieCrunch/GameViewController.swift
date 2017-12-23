@@ -26,6 +26,7 @@ class GameViewController: UIViewController {
   var score = 0
   
   var tapGestureRecognizer: UITapGestureRecognizer!
+  var fiveFingerTapsRecognizer: UITapGestureRecognizer!
 
   lazy var backgroundMusic: AVAudioPlayer? = {
     guard let url = Bundle.main.url(forResource: "Mining by Moonlight", withExtension: "mp3") else {
@@ -82,6 +83,11 @@ class GameViewController: UIViewController {
     
     // Start the background music.
     backgroundMusic?.play()
+    
+    // Wire up a custom gesture recognizer
+    self.fiveFingerTapsRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleFiveTaps))
+    self.fiveFingerTapsRecognizer.numberOfTapsRequired = 5
+    self.view.addGestureRecognizer(self.fiveFingerTapsRecognizer)
   }
   
   
@@ -237,6 +243,12 @@ class GameViewController: UIViewController {
     scene.isUserInteractionEnabled = true
     
     setupLevel(currentLevelNum)
+  }
+  
+  func handleFiveTaps() {
+    // Just crash
+    var crashWithMissingValueInDicitonary = Dictionary<Int,Int>()
+    _ = crashWithMissingValueInDicitonary[1]!
   }
   
 }
